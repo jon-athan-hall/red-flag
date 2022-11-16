@@ -1,3 +1,11 @@
+@import-normalize;
+
+:root {
+  --color-background: #fff;
+  --color-border: #000;
+  --color-text: #000;
+}
+
 html {
   box-sizing: border-box;
 }
