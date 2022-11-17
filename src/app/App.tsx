@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { DEFAULT_SPRINTER_DECK, DEFAULT_ROULEUR_DECK } from '../consts';
-import { CardObject } from '../types';
+import { CardObject, CardType } from '../types';
 import Hand from '../hand/Hand';
+import CardBack from '../card/CardBack';
 import './App.css';
 
 
@@ -13,6 +14,10 @@ const App = () => {
     console.log(value);
   }
 
+  const handleDeckClick = (type: CardType) => {
+    console.log(type);
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -22,6 +27,8 @@ const App = () => {
       <main className="App-main">
         <section className="App-hands">
           <Hand cards={sprinterDeck.slice(0, 4)} handleCardClick={handleCardClick} />
+          <CardBack type="sprinter" handleClick={handleDeckClick} />
+          <CardBack type="rouleur" handleClick={handleDeckClick} />
           <Hand cards={rouleurDeck.slice(0, 4)} handleCardClick={handleCardClick} />
         </section>
       </main>
