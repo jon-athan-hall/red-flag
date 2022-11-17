@@ -19,8 +19,10 @@ const App = () => {
         <h1>Red Flag</h1>
       </header>
       <main className="App-main">
-        <Hand cards={sprinterDeck.slice(0, 4)} handleCardClick={handleCardClick} />
-        <Hand cards={rouleurDeck.slice(0, 4)} handleCardClick={handleCardClick} />
+        <section className="App-hands">
+          <Hand cards={sprinterDeck.slice(0, 4)} handleCardClick={handleCardClick} />
+          <Hand cards={rouleurDeck.slice(0, 4)} handleCardClick={handleCardClick} />
+        </section>
       </main>
     </div>
   );
