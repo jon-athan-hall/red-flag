@@ -17,6 +17,7 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <h1>Red Flag</h1>
+        <a href="http://strongholdgames.com/our-games/flamme-rouge/" target="_blank">Buy the game</a>
       </header>
       <main className="App-main">
         <section className="App-hands">
