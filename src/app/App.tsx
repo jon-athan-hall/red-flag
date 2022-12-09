@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { DEFAULT_SPRINTER_DECK, DEFAULT_ROULEUR_DECK } from '../consts';
-import { CardObject, CardType } from '../types';
+import { CardType } from '../types';
 import { shuffle } from '../utils';
-import Hand from '../hand/Hand';
-import CardBack from '../card/CardBack';
-import './App.css';
+import Hand from '../hand/hand';
+import CardBack from '../card/card-back';
+import './app.css';
 
 
 const App = () => {
@@ -38,10 +38,10 @@ const App = () => {
       </header>
       <main className="App-main">
         <section className="App-hands">
-          <Hand cards={sprinterHand} handleCardClick={handleCardClick} />
+          <Hand cards={sprinterCards.hand} handleCardClick={handleCardClick} />
           <CardBack type="sprinter" handleClick={handleDeckClick} />
           <CardBack type="rouleur" handleClick={handleDeckClick} />
-          <Hand cards={rouleurHand} handleCardClick={handleCardClick} />
+          <Hand cards={rouleurCards.hand} handleCardClick={handleCardClick} />
         </section>
       </main>
     </div>

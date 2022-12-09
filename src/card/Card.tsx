@@ -1,5 +1,5 @@
 import { CardObject } from '../types';
-import './Card.css';
+import './card.css';
 
 interface CardProps extends CardObject {
   handleClick(value: number): void

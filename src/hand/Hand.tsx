@@ -1,6 +1,6 @@
 import { CardObject } from '../types';
-import Card from '../card/Card';
-import './Hand.css';
+import Card from '../card/card';
+import './hand.css';
 
 interface HandProps {
   cards: CardObject[],

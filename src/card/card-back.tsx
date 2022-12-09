@@ -1,5 +1,5 @@
 import { CardType } from '../types';
-import './CardBack.css';
+import './card-back.css';
 
 interface CardBackProps {
   type: CardType,
