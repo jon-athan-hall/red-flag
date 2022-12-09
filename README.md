@@ -1,5 +1,5 @@
 # red-flag
-Tactical bicycle racing board game, Flamme Rogue, built for the web.
+Tactical bicycle racing board game, Flamme Rouge, built for the web.
 
 # Getting Started with Create React App
 
