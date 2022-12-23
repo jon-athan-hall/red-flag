@@ -12,6 +12,10 @@
   font-weight: 600;
 }
 
+.Card--current {
+  transform: translateY(-1rem);
+}
+
 .Card:hover {
   cursor: pointer;
 }

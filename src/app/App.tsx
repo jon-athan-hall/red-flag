@@ -24,8 +24,8 @@ const App = () => {
     }
   })
 
-  const handleCardClick = (value: number) => {
-    console.log(value);
+  const handleCardConfirmation = (type: CardType, index: number) => {
+    console.log('value:', playerCards[type].hand[index]);
   }
 
   const handleDeckClick = (type: CardType) => {
@@ -69,7 +69,11 @@ const App = () => {
       </header>
 
       <main className="App-main">
-        <Tableau playerCards={playerCards} handleCardClick={handleCardClick} handleDeckClick={handleDeckClick} />
+        <Tableau
+          playerCards={playerCards}
+          handleCardConfirmation={handleCardConfirmation}
+          handleDeckClick={handleDeckClick}
+        />
       </main>
     </div>
   );
