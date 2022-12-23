@@ -1,7 +1,7 @@
-import { CardType } from '../types';
+import { CardType } from './card-types';
 import './card-back.css';
 
-interface CardBackProps {
+type CardBackProps = {
   type: CardType,
   handleClick(type: CardType): void
 }

@@ -1,32 +1,41 @@
 import { useState } from 'react';
-import { DEFAULT_SPRINTER_DECK, DEFAULT_ROULEUR_DECK } from '../consts';
-import { CardType } from '../types';
+import { DEFAULT_SPRINTEUR_DECK, DEFAULT_ROULEUR_DECK } from '../consts';
+import {
+  CardType,
+  PlayerCards,
+} from '../card/card-types';
 import { shuffle } from '../utils';
 import Hand from '../hand/hand';
 import CardBack from '../card/card-back';
 import './app.css';
 
-
 const App = () => {
-  const [sprinterCards, setSprinterCards] = useState({
-    deck: shuffle(DEFAULT_SPRINTER_DECK),
-    discard: [],
-    played: [],
-    hand: []
-  });
-
-  const [rouleurCards, setRouleurCards] = useState({
-    deck: shuffle(DEFAULT_ROULEUR_DECK),
-    discard: [],
-    played: [],
-    hand: []
-  });
+  const [playerCards, setPlayerCards] = useState<PlayerCards>({
+    [CardType.SPRINTEUR]: {
+      deck: shuffle(DEFAULT_SPRINTEUR_DECK),
+      discard: [],
+      played: [],
+      hand: []
+    },
+    [CardType.ROULEUR]: {
+      deck: shuffle(DEFAULT_ROULEUR_DECK),
+      discard: [],
+      played: [],
+      hand: []
+    }
+  })
 
   const handleCardClick = (value: number) => {
     console.log(value);
   }
 
   const handleDeckClick = (type: CardType) => {
+    /**
+     * Clone the deck Array with Array.from or spread operator.
+     * Using the = syntax copies by reference, so React doesn't see
+     * any changes when setCards is called.
+     */
+
     console.log(type);
   }
 
@@ -36,12 +45,13 @@ const App = () => {
         <h1>Red Flag</h1>
         <a href="http://strongholdgames.com/our-games/flamme-rouge/" target="_blank">Buy the game</a>
       </header>
+
       <main className="App-main">
         <section className="App-hands">
-          <Hand cards={sprinterCards.hand} handleCardClick={handleCardClick} />
-          <CardBack type="sprinter" handleClick={handleDeckClick} />
-          <CardBack type="rouleur" handleClick={handleDeckClick} />
-          <Hand cards={rouleurCards.hand} handleCardClick={handleCardClick} />
+          <Hand cards={playerCards[CardType.SPRINTEUR].hand} handleCardClick={handleCardClick} />
+          <CardBack type={CardType.SPRINTEUR} handleClick={handleDeckClick} />
+          <CardBack type={CardType.ROULEUR} handleClick={handleDeckClick} />
+          <Hand cards={playerCards[CardType.ROULEUR].hand} handleCardClick={handleCardClick} />
         </section>
       </main>
     </div>

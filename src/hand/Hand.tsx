@@ -1,4 +1,4 @@
-import { CardObject } from '../types';
+import { CardObject } from '../card/card-types';
 import Card from '../card/card';
 import './hand.css';
 
@@ -13,8 +13,9 @@ const Hand = ({ cards, handleCardClick }: HandProps): JSX.Element => {
       {cards.map((card, index) => {
         console.log(card.value);
         return (
-        <Card key={index} value={card.value} type={card.type} handleClick={handleCardClick} />
-      );})}
+          <Card key={index} value={card.value} type={card.type} handleClick={handleCardClick} />
+        );
+      })}
     </div>
   )
 };

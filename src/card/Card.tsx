@@ -1,4 +1,4 @@
-import { CardObject } from '../types';
+import { CardObject } from './card-types';
 import './card.css';
 
 interface CardProps extends CardObject {
