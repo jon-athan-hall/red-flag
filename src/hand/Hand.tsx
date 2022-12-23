@@ -10,12 +10,9 @@ interface HandProps {
 const Hand = ({ cards, handleCardClick }: HandProps): JSX.Element => {
   return (
     <div className="Hand">
-      {cards.map((card, index) => {
-        console.log(card.value);
-        return (
-          <Card key={index} value={card.value} type={card.type} handleClick={handleCardClick} />
-        );
-      })}
+      {cards.map((card, index) => (
+        <Card key={index} value={card.value} type={card.type} handleClick={handleCardClick} />
+      ))}
     </div>
   )
 };

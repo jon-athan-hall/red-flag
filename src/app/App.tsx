@@ -5,8 +5,7 @@ import {
   PlayerCards,
 } from '../card/card-types';
 import { shuffle } from '../utils';
-import Hand from '../hand/hand';
-import CardBack from '../card/card-back';
+import Tableau from '../tableau/tableau';
 import './app.css';
 
 const App = () => {
@@ -30,13 +29,36 @@ const App = () => {
   }
 
   const handleDeckClick = (type: CardType) => {
-    /**
-     * Clone the deck Array with Array.from or spread operator.
-     * Using the = syntax copies by reference, so React doesn't see
-     * any changes when setCards is called.
-     */
+    // Clone the deck Array with Array.from or spread operator.
+    let newDeck = Array.from(playerCards[type].deck);
 
-    console.log(type);
+    // Combine the old hand and the discard into a new discard.
+    let newDiscard = [...playerCards[type].discard, ...playerCards[type].hand];
+
+    // Blank hand to be built.
+    let newHand = [];
+
+    // Draw a new hand.
+    while (newHand.length < 4) {
+      // Shuffle up the discard, if there are no more deck cards to draw.
+      if (newDeck.length === 0) {
+        newDeck = shuffle(newDiscard);
+        newDiscard = [];
+      }
+
+      let card = newDeck.pop();
+      newHand.push(card);
+    }
+
+    setPlayerCards({
+      ...playerCards,
+      [type]: {
+        ...playerCards[type],
+        deck: newDeck,
+        discard: newDiscard,
+        hand: newHand
+      }
+    });
   }
 
   return (
@@ -47,12 +69,7 @@ const App = () => {
       </header>
 
       <main className="App-main">
-        <section className="App-hands">
-          <Hand cards={playerCards[CardType.SPRINTEUR].hand} handleCardClick={handleCardClick} />
-          <CardBack type={CardType.SPRINTEUR} handleClick={handleDeckClick} />
-          <CardBack type={CardType.ROULEUR} handleClick={handleDeckClick} />
-          <Hand cards={playerCards[CardType.ROULEUR].hand} handleCardClick={handleCardClick} />
-        </section>
+        <Tableau playerCards={playerCards} handleCardClick={handleCardClick} handleDeckClick={handleDeckClick} />
       </main>
     </div>
   );

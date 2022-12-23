@@ -1,0 +1,10 @@
+.Tableau {
+  position: absolute;
+  bottom: 1em;
+
+  display: flex;
+  gap: 4em;
+  justify-content: center;
+
+  width: calc(100% - 2em);
+}
