@@ -5,6 +5,10 @@
   --color-border: #000;
   --color-text: #000;
   --color-highlight: #8a060d;
+  --color-square-default: #989898;
+  --color-square-terminus: #efd543;
+  --color-square-ascent: #eb222e;
+  --color-square-descent: #2377ba;
 }
 
 html {

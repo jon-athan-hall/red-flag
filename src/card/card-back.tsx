@@ -2,16 +2,15 @@ import { CardType } from './card-types';
 import './card-back.css';
 
 type CardBackProps = {
-  type: CardType,
-  handleClick(type: CardType): void
+  type: CardType;
 }
 
-const CardBack = ({ type, handleClick }: CardBackProps): JSX.Element => {
+const CardBack = ({ type }: CardBackProps): JSX.Element => {
   return (
-    <div className="CardBack" onClick={() => handleClick(type)}>
+    <div className="CardBack">
       <div className="CardBack-type">{type.charAt(0)}</div>
     </div>
-  )
+  );
 };
 
 export default CardBack;

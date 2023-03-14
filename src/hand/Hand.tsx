@@ -5,20 +5,16 @@ import './hand.css';
 
 interface HandProps {
   cards: CardObject[],
-  handleCardConfirmation(type: CardType, value: number): void
+  handleCardSelection(type: CardType, value: number): void
 };
 
-const Hand = ({ cards, handleCardConfirmation }: HandProps): JSX.Element => {
+const Hand = ({ cards, handleCardSelection }: HandProps): JSX.Element => {
   // Keep track of which card has been temporarily selected.
   const [ currentCardIndex, setCurrentCardIndex ] = useState<number | null>(null);
 
   const handleCardClick = (type: CardType, index: number) => {
-    // If the temporarily selected card is clicked again, trigger confirmation.
-    if (index === currentCardIndex) {
-      handleCardConfirmation(type, currentCardIndex);
-    } else {
-      setCurrentCardIndex(index);
-    }
+    handleCardSelection(type, index);
+    setCurrentCardIndex(index);
   };
 
   return (

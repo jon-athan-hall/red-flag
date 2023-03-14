@@ -1,9 +1,7 @@
-import { useState } from 'react';
-import { DEFAULT_SPRINTEUR_DECK, DEFAULT_ROULEUR_DECK } from '../consts';
-import {
-  CardType,
-  PlayerCards,
-} from '../card/card-types';
+import { useEffect, useState } from 'react';
+import { DEFAULT_SPRINTEUR_DECK, DEFAULT_ROULEUR_DECK } from '../consts/decks';
+import { CardType, PlayerCards } from '../card/card-types';
+import { PlayerSelections } from './app-types';
 import { shuffle } from '../utils';
 import Tableau from '../tableau/tableau';
 import './app.css';
@@ -22,44 +20,90 @@ const App = () => {
       played: [],
       hand: []
     }
-  })
+  });
 
-  const handleCardConfirmation = (type: CardType, index: number) => {
-    console.log('value:', playerCards[type].hand[index]);
-  }
+  const [playerSelections, setPlayerSelections] = useState<PlayerSelections>({
+    [CardType.SPRINTEUR]: null,
+    [CardType.ROULEUR]: null
+  });
 
-  const handleDeckClick = (type: CardType) => {
-    // Clone the deck Array with Array.from or spread operator.
-    let newDeck = Array.from(playerCards[type].deck);
+  const [buttonText, setButtonText] = useState<string>('Draw cards');
+  const [handleButtonClick, setHandleButtonClick] = useState(() => () => drawHands());
 
-    // Combine the old hand and the discard into a new discard.
-    let newDiscard = [...playerCards[type].discard, ...playerCards[type].hand];
+  const drawHands = () => {
+    let newPlayerCards: PlayerCards = playerCards;
 
-    // Blank hand to be built.
-    let newHand = [];
+    for (const type of Object.values(CardType)) {
+      // Clone the deck Array with Array.from or spread operator.
+      let newDeck = Array.from(playerCards[type].deck);
 
-    // Draw a new hand.
-    while (newHand.length < 4) {
-      // Shuffle up the discard, if there are no more deck cards to draw.
-      if (newDeck.length === 0) {
-        newDeck = shuffle(newDiscard);
-        newDiscard = [];
+      // Combine the old hand and the discard into a new discard.
+      let newDiscard = [...playerCards[type].discard, ...playerCards[type].hand];
+
+      // Blank hand to be built.
+      let newHand = [];
+
+      // Draw a new hand.
+      while (newHand.length < 4) {
+        // Shuffle up the discard, if there are no more deck cards to draw.
+        if (newDeck.length === 0) {
+          newDeck = shuffle(newDiscard);
+          newDiscard = [];
+        }
+
+        /**
+         * Still have to make sure there is a card to draw. Near the end of
+         * the game, it's possible a hand will be less than 4 cards.
+         */ 
+        let card = newDeck.pop();
+
+        if (card === undefined) {
+          break;
+        } else {
+          newHand.push(card);
+        }
       }
 
-      let card = newDeck.pop();
-      newHand.push(card);
-    }
-
-    setPlayerCards({
-      ...playerCards,
-      [type]: {
+      newPlayerCards[type] = {
         ...playerCards[type],
         deck: newDeck,
         discard: newDiscard,
         hand: newHand
       }
+    }
+
+    setPlayerCards(newPlayerCards);
+    setButtonText('Confirm cards');
+  };
+
+  /**
+   * When the player clicks on a card in either their sprinteur or rouleur
+   * hand, update that selection with the index (not the value) of that
+   * card in the respective hand.
+   */
+  const handleCardSelection = (type: CardType, index: number) => {
+    setPlayerSelections({
+      ...playerSelections,
+      [type]: index
     });
-  }
+  };
+
+  /**
+   * The player must hit a confirmation button once a card has been selected
+   * from both the sprinteur and rouleur hands. As long as a card from each
+   * has been selected, go forward with moving the bicycles, and update the
+   * player cards.
+   */
+  const handleConfirmation = () => {
+    if (playerSelections[CardType.SPRINTEUR] === null || playerSelections[CardType.ROULEUR] === null) {
+      console.log('MUST SELECT BOTH');
+      return;
+    }
+
+    console.log('CONFIRMED');
+    console.log('sprinteur card:', playerCards[CardType.SPRINTEUR].hand[playerSelections[CardType.SPRINTEUR]]);
+    console.log('rouleur card:', playerCards[CardType.ROULEUR].hand[playerSelections[CardType.ROULEUR]]);
+  };
 
   return (
     <div className="App">
@@ -71,8 +115,9 @@ const App = () => {
       <main className="App-main">
         <Tableau
           playerCards={playerCards}
-          handleCardConfirmation={handleCardConfirmation}
-          handleDeckClick={handleDeckClick}
+          buttonText={buttonText}
+          handleButtonClick={handleButtonClick}
+          handleCardSelection={handleCardSelection}
         />
       </main>
     </div>

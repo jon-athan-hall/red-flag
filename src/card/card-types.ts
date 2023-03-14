@@ -15,4 +15,4 @@ export type PlayerCards = {
     played: CardObject[];
     hand: CardObject[];
   }
-}
+};

@@ -1,0 +1,19 @@
+.Square {
+  position: absolute;
+}
+
+.Square--default {
+  background-color: var(--color-square-default);
+}
+
+.Square--start, .Square--finish {
+  background-color: var(--color-square-terminus);
+}
+
+.Square--ascent {
+  background-color: var(--color-square-ascent);
+}
+
+.Square--descent {
+  background-color: var(--color-square-descent);
+}

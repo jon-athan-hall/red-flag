@@ -4,7 +4,20 @@
 
   display: flex;
   gap: 4em;
+  align-items: center;
   justify-content: center;
 
   width: calc(100% - 2em);
+}
+
+.Tableau-button {
+  background-color: var(--color-background);
+  border: 0.25rem solid var(--color-highlight);
+  border-radius: 0.25rem;
+  color: var(--color-highlight);
+  font-weight: 900;
+}
+
+.Tableau-button:hover {
+  cursor: pointer;
 }

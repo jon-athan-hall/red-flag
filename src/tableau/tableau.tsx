@@ -6,18 +6,20 @@ import './tableau.css';
 
 type TableauProps = {
   playerCards: PlayerCards;
-  handleCardConfirmation(type: CardType, value: number): void;
-  handleDeckClick(type: CardType): void;
+  buttonText: string;
+  handleCardSelection: (type: CardType, index: number) => void;
+  handleButtonClick?: () => void;
 };
 
-const Tableau = ({ playerCards, handleCardConfirmation, handleDeckClick }: TableauProps): JSX.Element => {
+const Tableau = ({ playerCards, buttonText, handleCardSelection, handleButtonClick }: TableauProps): JSX.Element => {
   return (
     <section className="Tableau">
       <Played cards={playerCards[CardType.SPRINTEUR].played} />
-      <Hand cards={playerCards[CardType.SPRINTEUR].hand} handleCardConfirmation={handleCardConfirmation} />
-      <CardBack type={CardType.SPRINTEUR} handleClick={handleDeckClick} />
-      <CardBack type={CardType.ROULEUR} handleClick={handleDeckClick} />
-      <Hand cards={playerCards[CardType.ROULEUR].hand} handleCardConfirmation={handleCardConfirmation} />
+      <Hand cards={playerCards[CardType.SPRINTEUR].hand} handleCardSelection={handleCardSelection} />
+      <CardBack type={CardType.SPRINTEUR} />
+      <button className="Tableau-button" onClick={() => handleButtonClick?.()}>{buttonText}</button>
+      <CardBack type={CardType.ROULEUR} />
+      <Hand cards={playerCards[CardType.ROULEUR].hand} handleCardSelection={handleCardSelection} />
       <Played cards={playerCards[CardType.ROULEUR].played} />
     </section>
   );
