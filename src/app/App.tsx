@@ -1,12 +1,24 @@
-import { useEffect, useState } from 'react';
+// Import dependencies from external libraries.
+import { useState } from 'react';
+
+// Import dependencies from project files.
 import { DEFAULT_SPRINTEUR_DECK, DEFAULT_ROULEUR_DECK } from '../consts/decks';
-import { CardType, PlayerCards } from '../card/card-types';
-import { PlayerSelections } from './app-types';
 import { shuffle } from '../utils';
 import Tableau from '../tableau/tableau';
+
+// Import types.
+import { PlayerSelections } from './app-types';
+import { CardType, PlayerCards } from '../card/card-types';
+
+// Import styles.
 import './app.css';
 
-const App = () => {
+const App = (): JSX.Element => {
+  /**
+   * Player cards are kept in two separate objects, one for each type of
+   * cyclist in the game. The cards all start in the draw deck, but are moved
+   * to a discard pile, a played list, or to the player's hand.
+   */
   const [playerCards, setPlayerCards] = useState<PlayerCards>({
     [CardType.SPRINTEUR]: {
       deck: shuffle(DEFAULT_SPRINTEUR_DECK),
@@ -22,15 +34,21 @@ const App = () => {
     }
   });
 
+  // Keep track of the player's selections until confirmation.
   const [playerSelections, setPlayerSelections] = useState<PlayerSelections>({
     [CardType.SPRINTEUR]: null,
     [CardType.ROULEUR]: null
   });
 
   const [buttonText, setButtonText] = useState<string>('Draw cards');
-  const [handleButtonClick, setHandleButtonClick] = useState(() => () => drawHands());
+  const [handleButtonClick, setHandleButtonClick] = useState(() => () => drawCards());
 
-  const drawHands = () => {
+  /**
+   * Draw a new hand of four cards from both decks. Take care of shuffling
+   * the discard pile, if the player has gone throw the whole deck and 
+   * still needs to fill their hand.
+   */
+  const drawCards = () => {
     let newPlayerCards: PlayerCards = playerCards;
 
     for (const type of Object.values(CardType)) {
@@ -94,8 +112,9 @@ const App = () => {
    * has been selected, go forward with moving the bicycles, and update the
    * player cards.
    */
-  const handleConfirmation = () => {
+  const confirmCards = () => {
     if (playerSelections[CardType.SPRINTEUR] === null || playerSelections[CardType.ROULEUR] === null) {
+      // @TODO Provide better feedback to the player.
       console.log('MUST SELECT BOTH');
       return;
     }
@@ -109,14 +128,15 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <h1>Red Flag</h1>
-        <a href="http://strongholdgames.com/our-games/flamme-rouge/" target="_blank">Buy the game</a>
+        <a href="http://strongholdgames.com/our-games/flamme-rouge/" rel="noreferrer" target="_blank">Buy the game</a>
       </header>
 
       <main className="App-main">
         <Tableau
           playerCards={playerCards}
           buttonText={buttonText}
-          handleButtonClick={handleButtonClick}
+          confirmCards={confirmCards}
+          drawCards={drawCards}
           handleCardSelection={handleCardSelection}
         />
       </main>

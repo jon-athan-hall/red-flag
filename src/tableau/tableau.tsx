@@ -1,23 +1,34 @@
-import { CardType, PlayerCards } from '../card/card-types';
+// Import dependencies from project files.
 import CardBack from '../card/card-back';
 import Hand from '../hand/hand';
 import Played from '../played/played';
+
+// Import types.
+import { CardType, PlayerCards } from '../card/card-types';
+
+// Import styles.
 import './tableau.css';
 
 type TableauProps = {
   playerCards: PlayerCards;
   buttonText: string;
+  confirmCards: Function;
+  drawCards: Function;
   handleCardSelection: (type: CardType, index: number) => void;
-  handleButtonClick?: () => void;
 };
 
-const Tableau = ({ playerCards, buttonText, handleCardSelection, handleButtonClick }: TableauProps): JSX.Element => {
+const Tableau = ({ playerCards, buttonText, confirmCards, drawCards, handleCardSelection }: TableauProps): JSX.Element => {
   return (
     <section className="Tableau">
       <Played cards={playerCards[CardType.SPRINTEUR].played} />
       <Hand cards={playerCards[CardType.SPRINTEUR].hand} handleCardSelection={handleCardSelection} />
       <CardBack type={CardType.SPRINTEUR} />
-      <button className="Tableau-button" onClick={() => handleButtonClick?.()}>{buttonText}</button>
+
+      <div className="Tableau__buttons">
+        <button className="Tableau__button" onClick={() => drawCards()}>Draw cards</button>
+        <button className="Tableau__button" onClick={() => confirmCards()}>Confirm cards</button>
+      </div>
+
       <CardBack type={CardType.ROULEUR} />
       <Hand cards={playerCards[CardType.ROULEUR].hand} handleCardSelection={handleCardSelection} />
       <Played cards={playerCards[CardType.ROULEUR].played} />

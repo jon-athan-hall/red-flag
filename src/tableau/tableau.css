@@ -10,14 +10,21 @@
   width: calc(100% - 2em);
 }
 
-.Tableau-button {
-  background-color: var(--color-background);
-  border: 0.25rem solid var(--color-highlight);
-  border-radius: 0.25rem;
-  color: var(--color-highlight);
-  font-weight: 900;
+.Tableau__buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
 }
 
-.Tableau-button:hover {
+.Tableau__button {
+  background-color: var(--color-highlight);
+  border: none;
+  border-radius: 0.25rem;
+  color: var(--color-background);
+  font-weight: 900;
+  padding: 0.5em;
+}
+
+.Tableau__button:hover {
   cursor: pointer;
 }
