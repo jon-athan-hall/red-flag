@@ -8,9 +8,8 @@
   background-color: var(--color-background);
   border-bottom: 0.25rem solid var(--color-border);
   display: flex;
-  height: 3em;
   justify-content: space-between;
-  padding: 0 1em;
+  padding: 1em;
   width: 100%;
 }
 
@@ -18,15 +17,15 @@
   margin: 0;
   font-size: 1rem;
   font-weight: 900;
-  height: calc(3em - 0.25em);
-  line-height: calc(3em - 0.25em);
 }
 
 .App__header a,
 .App__header a:hover,
 .App__header a:active,
 .App__header a:visited {
+  border-bottom: 0.25em solid var(--color-highlight);
   color: var(--color-highlight);
+  text-decoration: none;
 }
 
 .App__main {
