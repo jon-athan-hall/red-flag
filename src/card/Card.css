@@ -1,15 +1,13 @@
 .Card {
   --padding: 0.25em;
-  position: relative;
-
-  padding: var(--padding);
-  width: 4rem;
-  height: 6rem;
-
-  border: 0.25rem solid var(--color-border);
-  border-radius: 0.25rem;
+  border: 0.25em solid var(--color-border);
+  border-radius: 0.25em;
   color: var(--color-text);
   font-weight: 600;
+  height: 6em;
+  padding: var(--padding);
+  position: relative;
+  width: 4em;
 }
 
 .Card--current {
@@ -21,14 +19,14 @@
 }
 
 .Card-value {
+  left: var(--padding);
   position: absolute;
   top: var(--padding);
-  left: var(--padding);
 }
 
 .Card-type {
-  position: absolute;
   bottom: var(--padding);
   left: var(--padding);
+  position: absolute;
   text-transform: uppercase;
 }

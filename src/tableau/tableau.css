@@ -1,13 +1,8 @@
 .Tableau {
-  position: absolute;
-  bottom: 1em;
-
-  display: flex;
-  gap: 4em;
   align-items: center;
+  display: flex;
+  gap: 2em;
   justify-content: center;
-
-  width: calc(100% - 2em);
 }
 
 .Tableau__buttons {

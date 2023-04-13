@@ -1,18 +1,15 @@
 .CardBack {
   --padding: 0.25em;
-
-  display: flex;
   align-items: center;
-  justify-content: center;
-
-  padding: var(--padding);
-  width: 4rem;
-  height: 6rem;
-
   border: 0.25rem solid var(--color-border);
   border-radius: 0.25rem;
   color: var(--color-text);
+  display: flex;
   font-weight: 600;
+  height: 6em;
+  justify-content: center;
+  padding: var(--padding);
+  width: 4em;
 }
 
 .CardBack:hover {

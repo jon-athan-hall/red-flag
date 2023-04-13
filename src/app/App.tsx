@@ -2,8 +2,9 @@
 import { useState } from 'react';
 
 // Import dependencies from project files.
-import { DEFAULT_SPRINTEUR_DECK, DEFAULT_ROULEUR_DECK } from '../consts/decks';
+import { DEFAULT_SPRINTER_DECK, DEFAULT_ROULEUR_DECK } from '../consts/decks';
 import { shuffle } from '../utils';
+import Played from '../played/played';
 import Tableau from '../tableau/tableau';
 
 // Import types.
@@ -24,14 +25,14 @@ const App = (): JSX.Element => {
    * to a discard pile, a played list, or to the player's hand.
    */
   const [playerCards, setPlayerCards] = useState<PlayerCards>({
-    [CardType.SPRINTEUR]: {
-      deck: shuffle(DEFAULT_SPRINTEUR_DECK),
+    [CardType.ROULEUR]: {
+      deck: shuffle(DEFAULT_ROULEUR_DECK),
       discard: [],
       played: [],
       hand: []
     },
-    [CardType.ROULEUR]: {
-      deck: shuffle(DEFAULT_ROULEUR_DECK),
+    [CardType.SPRINTER]: {
+      deck: shuffle(DEFAULT_SPRINTER_DECK),
       discard: [],
       played: [],
       hand: []
@@ -40,8 +41,8 @@ const App = (): JSX.Element => {
 
   // Keep track of the player's selections until confirmation.
   const [playerSelections, setPlayerSelections] = useState<PlayerSelections>({
-    [CardType.SPRINTEUR]: null,
-    [CardType.ROULEUR]: null
+    [CardType.ROULEUR]: null,
+    [CardType.SPRINTER]: null
   });
 
   const [buttonText, setButtonText] = useState<string>('Draw cards');
@@ -53,7 +54,10 @@ const App = (): JSX.Element => {
    * still needs to fill their hand.
    */
   const drawCards = () => {
-    let newPlayerCards: PlayerCards = playerCards;
+    let newPlayerCards: any = {
+      [CardType.ROULEUR]: {},
+      [CardType.SPRINTER]: {}
+    };
 
     for (const type of Object.values(CardType)) {
       // Clone the deck Array with Array.from or spread operator.
@@ -91,7 +95,7 @@ const App = (): JSX.Element => {
         deck: newDeck,
         discard: newDiscard,
         hand: newHand
-      }
+      };
     }
 
     setPlayerCards(newPlayerCards);
@@ -99,7 +103,7 @@ const App = (): JSX.Element => {
   };
 
   /**
-   * When the player clicks on a card in either their sprinteur or rouleur
+   * When the player clicks on a card in either their sprinter or rouleur
    * hand, update that selection with the index (not the value) of that
    * card in the respective hand.
    */
@@ -112,36 +116,60 @@ const App = (): JSX.Element => {
 
   /**
    * The player must hit a confirmation button once a card has been selected
-   * from both the sprinteur and rouleur hands. As long as a card from each
+   * from both the sprinter and rouleur hands. As long as a card from each
    * has been selected, go forward with moving the bicycles, and update the
    * player cards.
    */
   const confirmCards = () => {
-    if (playerSelections[CardType.SPRINTEUR] === null || playerSelections[CardType.ROULEUR] === null) {
+    if (playerSelections[CardType.SPRINTER] === null || playerSelections[CardType.ROULEUR] === null) {
       // @TODO Provide better feedback to the player.
-      console.log('MUST SELECT BOTH');
+      console.log('Select one card each.');
       return;
     }
 
-    console.log('CONFIRMED');
-    console.log('sprinteur card:', playerCards[CardType.SPRINTEUR].hand[playerSelections[CardType.SPRINTEUR]]);
-    console.log('rouleur card:', playerCards[CardType.ROULEUR].hand[playerSelections[CardType.ROULEUR]]);
+    let newPlayerCards: any = {
+      [CardType.ROULEUR]: {},
+      [CardType.SPRINTER]: {}
+    };
+
+    for (const type of Object.values(CardType)) {
+      // Clone the hand Array with Array.from or spread operator.
+      let newHand = Array.from(playerCards[type].hand);
+
+      // Combine the selected card with the already played cards.
+      let newPlayed = [...playerCards[type].played, ...newHand.splice(playerSelections[type] as number, 1)];
+
+      // Combine the rest of the hand with the existing discarded cards.
+      let newDiscard = [...playerCards[type].discard, ...newHand];
+
+      newPlayerCards[type] = {
+        ...playerCards[type],
+        discard: newDiscard,
+        hand: [],
+        played: newPlayed
+      };
+    }
+
+    setPlayerSelections({ [CardType.ROULEUR]: null, [CardType.SPRINTER]: null }); // Null out selections.
+    setPlayerCards(newPlayerCards);
   };
 
   return (
     <div className="App">
-      <header className="App-header">
+      <header className="App__header">
         <h1>Red Flag</h1>
         <a href="http://strongholdgames.com/our-games/flamme-rouge/" rel="noreferrer" target="_blank">Buy the game</a>
       </header>
 
-      <main className="App-main">
+      <main className="App__main">
+        <Played cards={playerCards[CardType.SPRINTER].played} />
         <Tableau
           playerCards={playerCards}
           confirmCards={confirmCards}
           drawCards={drawCards}
           handleCardSelection={handleCardSelection}
         />
+        <Played cards={playerCards[CardType.ROULEUR].played} />
       </main>
     </div>
   );

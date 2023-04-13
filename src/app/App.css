@@ -1,38 +1,45 @@
 .App {
-  position: relative;
   display: flex;
   flex-direction: column;
 }
 
-.App-header {
+.App__header {
+  background-color: var(--color-background);
+  border-bottom: 0.25rem solid var(--color-border);
   display: flex;
+  height: 3em;
   justify-content: space-between;
   padding: 0 1em;
   width: 100%;
-  height: 3em;
-  background-color: var(--color-background);
-  border-bottom: 0.25rem solid var(--color-border);
 }
 
-.App-header > * {
+.App__header > * {
   margin: 0;
-  height: calc(3em - 0.25rem);
   font-size: 1rem;
   font-weight: 900;
-  line-height: calc(3em - 0.25rem);
+  height: calc(3em - 0.25em);
+  line-height: calc(3em - 0.25em);
 }
 
-.App-header a,
-.App-header a:hover,
-.App-header a:active,
-.App-header a:visited {
+.App__header a,
+.App__header a:hover,
+.App__header a:active,
+.App__header a:visited {
   color: var(--color-highlight);
-  border-bottom: 0.25 solid var(--color-highlight);
 }
 
-.App-main {
+.App__main {
+  display: flex;
   flex: 1 0 auto;
+  justify-content: space-between;
   padding: 1em;
-  height: calc(100vh - 3em);
-  text-align: center;
+}
+
+.App__main > * {
+  flex: 1 0 auto;
+}
+
+.App__main > *:first-child,
+.App__main > *:last-child {
+  flex: none;
 }

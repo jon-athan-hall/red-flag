@@ -1,5 +1,5 @@
 export enum CardType {
-  SPRINTEUR = 'sprinteur',
+  SPRINTER = 'sprinter',
   ROULEUR = 'rouleur'
 };
 
