@@ -45,9 +45,6 @@ const App = (): JSX.Element => {
     [CardType.SPRINTER]: null
   });
 
-  const [buttonText, setButtonText] = useState<string>('Draw cards');
-  const [handleButtonClick, setHandleButtonClick] = useState(() => () => drawCards());
-
   /**
    * Draw a new hand of four cards from both decks. Take care of shuffling
    * the discard pile, if the player has gone throw the whole deck and 
@@ -99,7 +96,6 @@ const App = (): JSX.Element => {
     }
 
     setPlayerCards(newPlayerCards);
-    setButtonText('Confirm cards');
   };
 
   /**
