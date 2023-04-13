@@ -1,4 +1,4 @@
-import { TileType, TerrainType, SquareObject } from '../square/square-types';
+import { TileType, TerrainType, SquareObject } from '../features/square/square-types';
 
 type TrackTile = {
   [key: string]: SquareObject[];
