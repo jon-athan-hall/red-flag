@@ -2,14 +2,14 @@
 import { useState } from 'react';
 
 // Import dependencies from project files.
-import { DEFAULT_SPRINTER_DECK, DEFAULT_ROULEUR_DECK } from '../consts/decks';
-import { shuffle } from '../utils';
-import Played from '../played/played';
-import Tableau from '../tableau/tableau';
+import { DEFAULT_SPRINTER_DECK, DEFAULT_ROULEUR_DECK } from '../../consts/decks';
+import { shuffle } from '../../utils';
+import Played from '../../played/played';
+import Tableau from '../../tableau/tableau';
 
 // Import types.
-import { PlayerSelections } from '../features/app/app-types';
-import { CardType, PlayerCards } from '../card/card-types';
+import { PlayerSelections } from './app-types';
+import { CardType, PlayerCards } from '../../card/card-types';
 
 // Import styles.
 import './app.css';
