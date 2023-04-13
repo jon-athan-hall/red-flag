@@ -19,9 +19,12 @@ interface PlayedProps {
 const Played = ({ cards }: PlayedProps): JSX.Element => {
   return (
     <div className="Played">
-      {cards.map((card, index) => (
-        <Card key={index} value={card.value} type={card.type} style={{ marginTop: `calc(${index} * 0.25em)` }} />
-      ))}
+      <h2 className="Played__heading">Played</h2>
+      <div className="Played__stack">
+        {cards.map((card, index) => (
+          <Card key={index} value={card.value} type={card.type} style={{ top: `calc(${index} * 2em)` }} />
+        ))}
+      </div>
     </div>
   );
 };

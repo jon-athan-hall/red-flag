@@ -1,0 +1,22 @@
+.Played {
+  text-align: center;
+  width: 4em;
+}
+
+.Played__heading {
+  border-bottom: 0.25em solid var(--color-highlight);
+  color: var(--color-highlight);
+  font-size: 1rem;
+  font-weight: 900;
+  margin: 0;
+  margin-bottom: 0.5em;
+  padding-bottom: 0.25em;
+}
+
+.Played__stack {
+  position: relative;
+}
+
+.Played__stack > * {
+  position: absolute;
+}

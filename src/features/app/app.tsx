@@ -150,8 +150,8 @@ const App = (): JSX.Element => {
       };
     }
 
-    setPlayerSelections({ [CardType.ROULEUR]: null, [CardType.SPRINTER]: null }); // Null out selections.
     setPlayerCards(newPlayerCards);
+    setPlayerSelections({ [CardType.ROULEUR]: null, [CardType.SPRINTER]: null }); // Null out selections.
   };
 
   return (
@@ -162,15 +162,17 @@ const App = (): JSX.Element => {
       </header>
 
       <main className="App__main">
-        <Played cards={playerCards[CardType.SPRINTER].played} />
-        <Tableau
-          playerCards={playerCards}
-          confirmCards={confirmCards}
-          drawCards={drawCards}
-          handleCardSelection={handleCardSelection}
-        />
         <Played cards={playerCards[CardType.ROULEUR].played} />
+        <div>Board</div>
+        <Played cards={playerCards[CardType.SPRINTER].played} />
       </main>
+
+      <Tableau
+        playerCards={playerCards}
+        confirmCards={confirmCards}
+        drawCards={drawCards}
+        handleCardSelection={handleCardSelection}
+      />
     </div>
   );
 };

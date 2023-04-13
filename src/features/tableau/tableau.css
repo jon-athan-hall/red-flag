@@ -3,6 +3,8 @@
   display: flex;
   gap: 2em;
   justify-content: center;
+  padding: 1em;
+  width: 100%;
 }
 
 .Tableau__buttons {

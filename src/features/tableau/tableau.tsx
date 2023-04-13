@@ -1,7 +1,6 @@
 // Import dependencies from project files.
 import CardBack from '../card/card-back';
 import Hand from '../hand/hand';
-import Played from '../played/played';
 
 // Import types.
 import { CardType, PlayerCards } from '../card/card-types';
