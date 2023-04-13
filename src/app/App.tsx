@@ -8,7 +8,7 @@ import Played from '../played/played';
 import Tableau from '../tableau/tableau';
 
 // Import types.
-import { PlayerSelections } from './app-types';
+import { PlayerSelections } from '../features/app/app-types';
 import { CardType, PlayerCards } from '../card/card-types';
 
 // Import styles.
