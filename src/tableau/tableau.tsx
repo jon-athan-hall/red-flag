@@ -11,13 +11,12 @@ import './tableau.css';
 
 type TableauProps = {
   playerCards: PlayerCards;
-  buttonText: string;
   confirmCards: Function;
   drawCards: Function;
   handleCardSelection: (type: CardType, index: number) => void;
 };
 
-const Tableau = ({ playerCards, buttonText, confirmCards, drawCards, handleCardSelection }: TableauProps): JSX.Element => {
+const Tableau = ({ playerCards, confirmCards, drawCards, handleCardSelection }: TableauProps): JSX.Element => {
   return (
     <section className="Tableau">
       <Played cards={playerCards[CardType.SPRINTEUR].played} />

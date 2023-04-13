@@ -13,6 +13,10 @@ import { CardType, PlayerCards } from '../card/card-types';
 // Import styles.
 import './app.css';
 
+/**
+ * Highest level component that controls most, if not all, of the game state.
+ * @returns {JSX.Element}
+ */
 const App = (): JSX.Element => {
   /**
    * Player cards are kept in two separate objects, one for each type of
@@ -134,7 +138,6 @@ const App = (): JSX.Element => {
       <main className="App-main">
         <Tableau
           playerCards={playerCards}
-          buttonText={buttonText}
           confirmCards={confirmCards}
           drawCards={drawCards}
           handleCardSelection={handleCardSelection}
