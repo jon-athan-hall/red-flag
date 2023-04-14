@@ -1,6 +1,6 @@
 const Lane = (): JSX.Element => {
   return (
-    <div>Lane</div>
+    <div></div>
   );
 };
 

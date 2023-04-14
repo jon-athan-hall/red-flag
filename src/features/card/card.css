@@ -1,7 +1,7 @@
 .Card {
   --padding: 0.25em;
   background-color: var(--color-background);
-  border: 0.25em solid var(--color-border);
+  border: var(--border);
   border-radius: 0.25em;
   color: var(--color-text);
   font-weight: 600;

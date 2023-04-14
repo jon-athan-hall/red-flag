@@ -1,5 +1,11 @@
 .Square {
+  --height: 50px;
+  border: var(--border);
+  display: flex;
+  flex-direction: column;
+  height: var(--height);
   position: absolute;
+  width: var(--height); 
 }
 
 .Square--default {
@@ -16,4 +22,16 @@
 
 .Square--descent {
   background-color: var(--color-square-descent);
+}
+
+.Square > * {
+  flex: 1 0 auto;
+}
+
+.Square > *:first-child {
+  border-bottom: 2px solid var(--color-border);
+}
+
+.Square > *:last-child {
+  border-top: 2px solid var(--color-border);
 }

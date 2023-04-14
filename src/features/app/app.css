@@ -6,7 +6,7 @@
 
 .App__header {
   background-color: var(--color-background);
-  border-bottom: 0.25rem solid var(--color-border);
+  border-bottom: var(--border);
   display: flex;
   justify-content: space-between;
   padding: 1em;
@@ -23,7 +23,7 @@
 .App__header a:hover,
 .App__header a:active,
 .App__header a:visited {
-  border-bottom: 0.25em solid var(--color-highlight);
+  border-bottom: var(--border);
   color: var(--color-highlight);
   text-decoration: none;
 }
