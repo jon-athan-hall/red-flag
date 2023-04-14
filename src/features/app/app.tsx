@@ -3,7 +3,9 @@ import { useState } from 'react';
 
 // Import dependencies from project files.
 import { DEFAULT_SPRINTER_DECK, DEFAULT_ROULEUR_DECK } from '../../consts/decks';
+import { STAGES } from '../../consts/stages';
 import { shuffle } from '../../utils';
+import Board from '../board/board';
 import Played from '../played/played';
 import Tableau from '../tableau/tableau';
 
@@ -19,6 +21,7 @@ import './app.css';
  * @returns {JSX.Element}
  */
 const App = (): JSX.Element => {
+  console.log(typeof STAGES);
   /**
    * Player cards are kept in two separate objects, one for each type of
    * cyclist in the game. The cards all start in the draw deck, but are moved
@@ -158,16 +161,17 @@ const App = (): JSX.Element => {
       </header>
 
       <main className="App__main">
-        <Played cards={playerCards[CardType.ROULEUR].played} />
-        <div>Board</div>
-        <Played cards={playerCards[CardType.SPRINTER].played} />
+        <Played cards={playerCards[CardType.ROULEUR].played} cardType={CardType.ROULEUR} />
+        <Board stage={STAGES['Avenue Corso Paseo']} />
+        <Played cards={playerCards[CardType.SPRINTER].played} cardType={CardType.SPRINTER} />
       </main>
 
       <Tableau
-        playerCards={playerCards}
         confirmCards={confirmCards}
         drawCards={drawCards}
         handleCardSelection={handleCardSelection}
+        playerCards={playerCards}
+        playerSelections={playerSelections}
       />
     </div>
   );

@@ -1,14 +1,16 @@
 // Import dependencies from project files.
+import { capitalize } from '../../utils';
 import Card from '../card/card';
 
 // Import types.
-import { CardObject } from '../card/card-types';
+import { CardObject, CardType } from '../card/card-types';
 
 // Import styles.
 import './played.css';
 
-interface PlayedProps {
-  cards: CardObject[],
+type PlayedProps = {
+  cards: CardObject[];
+  cardType: CardType;
 };
 
 /**
@@ -16,10 +18,10 @@ interface PlayedProps {
  * @param {PlayedProps}
  * @returns {JSX.Element}
  */
-const Played = ({ cards }: PlayedProps): JSX.Element => {
+const Played = ({ cards, cardType }: PlayedProps): JSX.Element => {
   return (
     <div className="Played">
-      <h2 className="Played__heading">Played</h2>
+      <h2 className="Played__heading">Played {capitalize(cardType)} Cards</h2>
       <div className="Played__stack">
         {cards.map((card, index) => (
           <Card key={index} value={card.value} type={card.type} style={{ top: `calc(${index} * 2em)` }} />

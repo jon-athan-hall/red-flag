@@ -3,29 +3,22 @@ import { CardObject, CardType } from '../card/card-types';
 import Card from '../card/card';
 import './hand.css';
 
-interface HandProps {
-  cards: CardObject[],
-  handleCardSelection(type: CardType, value: number): void
+type HandProps = {
+  cards: CardObject[];
+  handleCardSelection(type: CardType, value: number): void;
+  selectedCardIndex: number | null;
 };
 
-const Hand = ({ cards, handleCardSelection }: HandProps): JSX.Element => {
-  // Keep track of which card has been temporarily selected.
-  const [ currentCardIndex, setCurrentCardIndex ] = useState<number | null>(null);
-
-  const handleCardClick = (type: CardType, index: number) => {
-    handleCardSelection(type, index);
-    setCurrentCardIndex(index);
-  };
-
+const Hand = ({ cards, handleCardSelection, selectedCardIndex }: HandProps): JSX.Element => {
   return (
     <div className="Hand">
       {cards.map((card, index) => (
         <Card
+          current={index === selectedCardIndex}
+          handleClick={() => handleCardSelection(card.type, index)}
           key={index}
-          value={card.value}
           type={card.type}
-          handleClick={() => handleCardClick(card.type, index)}
-          current={index === currentCardIndex}
+          value={card.value}
         />
       ))}
     </div>

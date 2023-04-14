@@ -25,3 +25,7 @@
 .Tableau__button:hover {
   cursor: pointer;
 }
+
+.Tableau__button:disabled {
+  background-color: var(--color-square-default);
+}

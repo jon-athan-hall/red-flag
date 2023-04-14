@@ -10,3 +10,12 @@
 
   return collection;
 }
+
+
+/**
+ * @param {string} inputString - string to be capitalized.
+ * @return {string} Capitalized string.
+ */
+export function capitalize(inputString: string) {
+  return inputString.charAt(0).toUpperCase() + inputString.slice(1);
+}
