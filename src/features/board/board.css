@@ -1,5 +1,11 @@
 .Board {
   border: var(--border);
   margin: 0 1em;
+  padding: 1em;
+}
+
+.Board__wrapper {
+  height: 100%;
   position: relative;
+  width: 100%
 }

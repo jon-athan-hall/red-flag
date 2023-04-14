@@ -1,11 +1,22 @@
 .Square {
   --height: 50px;
-  border: var(--border);
+  border-bottom: var(--border-half);
+  border-left: var(--border);
+  border-right: var(--border);
+  border-top: var(--border-half);
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   height: var(--height);
   position: absolute;
   width: var(--height); 
+}
+
+.Square:first-child {
+  border-bottom: var(--border);
+}
+
+.Square:last-child {
+  border-top: var(--border);
 }
 
 .Square--default {
@@ -29,9 +40,9 @@
 }
 
 .Square > *:first-child {
-  border-bottom: 2px solid var(--color-border);
+  border-right: var(--border-half);
 }
 
 .Square > *:last-child {
-  border-top: 2px solid var(--color-border);
+  border-left: var(--border-half);
 }

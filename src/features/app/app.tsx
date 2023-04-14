@@ -21,7 +21,6 @@ import './app.css';
  * @returns {JSX.Element}
  */
 const App = (): JSX.Element => {
-  console.log(typeof STAGES);
   /**
    * Player cards are kept in two separate objects, one for each type of
    * cyclist in the game. The cards all start in the draw deck, but are moved
