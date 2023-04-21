@@ -4,7 +4,7 @@ import Square from '../square/square';
 
 // Import types.
 import { Direction } from '../app/app-types';
-import { Stage, Offset } from '../board/board-types';
+import { Stage, Offset } from './board-types';
 import { TileType } from '../square/square-types';
 
 /// Import styles.
@@ -35,45 +35,13 @@ const calculateOffsets = (direction: Direction, currentOffset: Offset) => {
 };
 
 const Board = ({ stage }: BoardProps): JSX.Element => {
-  let currentDirection: Direction = Direction.N;
-  let offset: Offset = { X: 0, Y: -50 };
-
-  const squares = TRACK_TILES[stage[9]].map((square, index) => {
-    offset = calculateOffsets(currentDirection, offset);
-
-    switch (square.tileType) {
-      case TileType.SHARP_LEFT:
-        currentDirection = (currentDirection - 45) % 360;
-        break;
-
-      case TileType.SHARP_RIGHT:
-        currentDirection = (currentDirection + 45) % 360;
-        break;
-      
-      case TileType.SOFT_LEFT:
-        currentDirection = (currentDirection - 22.5) % 360;
-        break;
-      
-      case TileType.SOFT_RIGHT:
-        currentDirection = (currentDirection + 22.5) % 360;
-        break;
-
-      case TileType.STRAIGHT:
-      default:
-        // Do nothing.
-    }
-
+  // Use stage[9] for curves.
+  const squares = TRACK_TILES[stage[0]].map((square, index) => {
     return (
-      <Square
-        key={index}
-        offsetX={offset.X}
-        offsetY={offset.Y}
-        rotation={currentDirection}
-        terrainType={square.terrainType}
-        tileType={square.tileType}
-      />
+      <Square terrainType={square.terrainType} tileType={square.tileType} />
     );
   });
+
   return (
     <div className="Board">
       <div className="Board__wrapper">
