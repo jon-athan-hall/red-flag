@@ -5,14 +5,21 @@ import './square.css';
 interface SquareProps extends SquareObject {
 };
 
+const SIZE = 50;
+
 const Square = ({ terrainType = TerrainType.DEFAULT, tileType }: SquareProps): JSX.Element => {
   let shapes = [];
 
-  if (tileType === TileType.STRAIGHT) {
-    shapes.push(<rect x="1" y="0" width="48" height="50" className={`Terrain--${terrainType}`} />);
-    shapes.push(<path d="M 0 50 L 0 0 M 50 50 L 50 0" stroke="black" strokeWidth={1} />);
-    shapes.push(<path d="M 25 50 L 25 0" stroke="black" strokeWidth={1} />);
-  }
+  switch (tileType) {
+    case TileType.STRAIGHT:
+      shapes.push(<rect x="1" y="0" width="48" height={`${SIZE}`} />);
+      shapes.push(<path d={`M 0 ${SIZE} L 0 0 M ${SIZE} ${SIZE} L ${SIZE} 0`} />);
+      shapes.push(<path d={`M ${SIZE / 2} ${SIZE} L ${SIZE / 2} 0`} />);
+      break;
+    case TileType.SHARP_RIGHT:
+      shapes.push(<path d={`M 0 ${SIZE} A ${SIZE} ${SIZE} 0 0 1 ${SIZE - (SIZE * Math.sin(Math.PI / 4))} ${SIZE - (SIZE * Math.cos(Math.PI / 4))} L ${SIZE} ${SIZE} Z`} />);
+  };
+
 
 
       /*
@@ -25,7 +32,7 @@ const Square = ({ terrainType = TerrainType.DEFAULT, tileType }: SquareProps): J
         */
   return (
     <div className={`Square Square--${terrainType}`}>
-      <svg height="50" width="50" viewBox="0 0 50 50">
+      <svg height="50" width="50">
         {shapes.map(path => path)}
       </svg>
     </div>

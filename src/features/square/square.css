@@ -1,20 +1,21 @@
-.Terrain--default {
+.Square {
+  stroke: var(--color-border);
+  stroke-width: 1px;
+}
+
+.Square--default {
   fill: var(--color-square-default);
-  stroke: var(--color-border);
 }
 
-.Terrain--start,
-.Terrain--finish {
+.Square--start,
+.Square--finish {
   fill: var(--color-square-terminus);
-  stroke: var(--color-border);
 }
 
-.Terrain--ascent {
+.Square--ascent {
   fill: var(--color-square-ascent);
-  stroke: var(--color-border);
 }
 
-.Terrain--descent {
+.Square--descent {
   fill: var(--color-square-descent);
-  stroke: var(--color-border);
 }

@@ -36,7 +36,7 @@ const calculateOffsets = (direction: Direction, currentOffset: Offset) => {
 
 const Board = ({ stage }: BoardProps): JSX.Element => {
   // Use stage[9] for curves.
-  const squares = TRACK_TILES[stage[0]].map((square, index) => {
+  const squares = TRACK_TILES[stage[9]].map((square, index) => {
     return (
       <Square terrainType={square.terrainType} tileType={square.tileType} />
     );
