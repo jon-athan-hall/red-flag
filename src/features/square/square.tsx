@@ -6,11 +6,12 @@ interface SquareProps extends SquareObject {
 };
 
 const Square = ({ terrainType = TerrainType.DEFAULT, tileType }: SquareProps): JSX.Element => {
-  let paths = [];
+  let shapes = [];
 
   if (tileType === TileType.STRAIGHT) {
-    paths.push(<path d="M 0 50 L 0 0 M 50 50 L 50 0" fill="green" fillOpacity={1.0} stroke="black" strokeWidth={8} />);
-    paths.push(<path d="M 25 50 L 25 0" fill="green" stroke="black" strokeWidth={4} />);
+    shapes.push(<rect x="1" y="0" width="48" height="50" className={`Terrain--${terrainType}`} />);
+    shapes.push(<path d="M 0 50 L 0 0 M 50 50 L 50 0" stroke="black" strokeWidth={1} />);
+    shapes.push(<path d="M 25 50 L 25 0" stroke="black" strokeWidth={1} />);
   }
 
 
@@ -24,8 +25,8 @@ const Square = ({ terrainType = TerrainType.DEFAULT, tileType }: SquareProps): J
         */
   return (
     <div className={`Square Square--${terrainType}`}>
-      <svg height="50" width="50" viewBox="0 0 100 100">
-        {paths.map(path => path)}
+      <svg height="50" width="50" viewBox="0 0 50 50">
+        {shapes.map(path => path)}
       </svg>
     </div>
   );
