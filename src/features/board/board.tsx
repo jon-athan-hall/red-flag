@@ -1,11 +1,11 @@
 // Import dependencies from project files.
+import { STAGES } from '../../consts/stages';
 import { TRACK_TILES, SQUARE_SIZE } from '../../consts/track-tiles';
 import Square from '../square/square';
 
 // Import types.
 import { Direction } from '../app/app-types';
 import { Stage, Offset } from './board-types';
-import { TileType } from '../square/square-types';
 
 /// Import styles.
 import './board.css';
@@ -35,11 +35,21 @@ const calculateOffsets = (direction: Direction, currentOffset: Offset) => {
 };
 
 const Board = ({ stage }: BoardProps): JSX.Element => {
-  const squares = TRACK_TILES[stage[10]].map((square, index) => {
-    console.log(square.tileType);
-    return (
-      <Square key={index} terrainType={square.terrainType} tileType={square.tileType} />
-    );
+  const squares: any[] = [];
+
+  // Iterate over all the track tiles in the stage.
+  STAGES['Avenue Corso Paseo'].forEach((tileKey, t) => {
+    // Iterate over all squares of the track tile.
+    TRACK_TILES[tileKey].forEach((square, s) => {
+      // Use the two indexes from the forEach loops to create a unique key string.
+      squares.push(
+        <Square
+          key={t.toString() + s.toString()}
+          terrainType={square.terrainType}
+          tileType={square.tileType}
+        />
+      );
+    });
   });
 
   return (
