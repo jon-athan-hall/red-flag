@@ -1,6 +1,8 @@
 .Square {
+  fill: none;
+  position: absolute;
   stroke: var(--color-border);
-  stroke-width: 1px;
+  stroke-width: 2px;
 }
 
 .Square--default {

@@ -1,6 +1,6 @@
 export type Offset = {
-  X: number;
-  Y: number;
+  x: number;
+  y: number;
 };
 
 export type Stage = string[];

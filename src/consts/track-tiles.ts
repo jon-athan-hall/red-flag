@@ -4,7 +4,7 @@ type TrackTile = {
   [key: string]: SquareObject[];
 };
 
-export const SQUARE_SIZE = 50;
+export const SQUARE_SIZE = 24;
 
 export const TRACK_TILES: TrackTile  = {
   'a': [

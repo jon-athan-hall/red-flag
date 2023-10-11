@@ -21,7 +21,7 @@ const Card = ({ value, type, handleClick, current, style }: CardProps): JSX.Elem
 
   classList += current ? ' Card--current' : '';
 
-  // Note the optional chaining syntax for the handleClick function call.
+  // Optional chaining syntax for the handleClick function call.
   return (
     <div className={classList} onClick={() => handleClick?.(type, value)} style={style}>
       <div className="Card-value">{value}</div>
